@@ -3,11 +3,14 @@ import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// URL estável de produção do projeto na Vercel (não usar URLs de deploy com hash).
+// Este mesmo código é publicado em dois lugares (Vercel e GitHub Pages), cada um
+// com seu próprio domínio — por isso o valor vem de uma env var, com a URL da
+// Vercel como padrão. O workflow do GitHub Pages (.github/workflows/deploy-pages.yml)
+// define SITE_URL para o domínio do Pages antes de buildar.
 // É a única fonte do domínio: canonical, hreflang, OG, JSON-LD, robots.txt e sitemap
-// derivam de Astro.site. Ao entrar o domínio definitivo, troque aqui e ajuste a meta
-// robots em src/components/Seo.astro.
-const SITE = 'https://mylanding-rose-five.vercel.app';
+// derivam de Astro.site. Ao entrar um domínio definitivo próprio, troque o padrão
+// aqui e ajuste a meta robots em src/components/Seo.astro.
+const SITE = process.env.SITE_URL || 'https://mylanding-rose-five.vercel.app';
 
 export default defineConfig({
   site: SITE,
