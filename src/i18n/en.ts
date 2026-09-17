@@ -6,7 +6,7 @@ export const en: Dictionary = {
   meta: {
     htmlLang: 'en',
     ogLocale: 'en_US',
-    title: 'Endryus Schmidel — Full-Stack Developer',
+    title: 'Endryus Schmidel',
     description:
       'Full-stack developer based in Rio de Janeiro. Java, Spring Boot and React, focused on application security, multi-tenancy and access control.',
     ogImageAlt: 'Endryus Schmidel, full-stack developer. Java, Spring Boot and React.',

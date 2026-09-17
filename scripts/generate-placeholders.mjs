@@ -1,15 +1,21 @@
-// Gera o apple-touch-icon (public/apple-touch-icon.png).
-// Uso: node scripts/generate-placeholders.mjs
-// A foto do hero é src/assets/profile.png (enviada manualmente, não gerada).
+// Gera favicon.png e apple-touch-icon.png a partir de src/assets/favicon.png
+// (o monograma "ES", em PNG transparente). Uso: node scripts/generate-placeholders.mjs
 import sharp from 'sharp';
 
-const touch = `
-<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
-  <rect width="180" height="180" fill="#0a0a0a"/>
-  <path d="M62 46h56v13H77v15h36v13H77v16h41v13H62z" fill="#fafafa"/>
-  <rect x="62" y="130" width="56" height="3" fill="#525252"/>
-</svg>`;
+const BG = '#0a0a0a';
+const source = sharp('src/assets/favicon.png');
 
-await sharp(Buffer.from(touch)).png().toFile('public/apple-touch-icon.png');
+// Favicon da aba: achatado no preto do site — transparente ficaria quase
+// invisível em navegadores com tema claro.
+await source.clone().resize(64, 64).flatten({ background: BG }).png().toFile('public/favicon.png');
 
-console.log('apple-touch-icon gerado');
+// Apple touch icon: precisa de fundo opaco — iOS pinta áreas transparentes de
+// preto puro por padrão, então achatamos explicitamente no preto do site.
+await source
+  .clone()
+  .resize(180, 180)
+  .flatten({ background: BG })
+  .png()
+  .toFile('public/apple-touch-icon.png');
+
+console.log('favicon.png e apple-touch-icon.png gerados');
