@@ -1,0 +1,174 @@
+@import 'tailwindcss';
+
+/* O protótipo de referência não deve gerar classes no CSS final. */
+@source not '../../lovable';
+
+@theme {
+  /* Paleta monocromática neutra (protótipo: hsl 0 0% 4% / 98%). */
+  --color-bg: #0a0a0a;
+  --color-bg-alt: #0d0d0d;
+  --color-chip: #141414;
+  --color-line: #262626;
+  --color-line-strong: #404040;
+  --color-fg: #fafafa;
+  --color-soft: #d4d4d4;
+  --color-muted: #a3a3a3;
+  /* Rótulos e metadados: o gray-500 do protótipo não passa em contraste AA. */
+  --color-subtle: #8a8a8a;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-bebas), sans-serif;
+
+  /* Títulos ~15% menores que no protótipo. */
+  --text-hero: clamp(3.4rem, 12.75vw, 10.2rem);
+  --text-hero--line-height: 0.85;
+  --text-section: clamp(2.55rem, 8.5vw, 6.8rem);
+  --text-section--line-height: 0.85;
+
+  --tracking-display: -0.02em;
+  --tracking-label: 0.1em;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 4.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      scroll-padding-top: 0;
+    }
+  }
+
+  ::selection {
+    background-color: rgb(163 163 163 / 0.3);
+    color: var(--color-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Container das seções. A partir de 768px reserva à direita o espaço do menu
+     lateral fixo, então o menu nunca cobre texto, seja qual for a altura. */
+  .page-container {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .page-container {
+      padding-left: 3rem;
+      padding-right: 7rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page-container {
+      padding-left: 5rem;
+      padding-right: max(5rem, calc(11rem - max(0px, (100vw - 80rem) / 2)));
+    }
+  }
+
+  /* Protótipo: 8rem / 12rem / 16rem. Aqui ~30% menos. */
+  .section-padding {
+    padding-block: 5.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-block: 8.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-padding {
+      padding-block: 11.25rem;
+    }
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-display);
+  }
+
+  /* Marcador de lista: traço fino alinhado ao meio da primeira linha. */
+  .dash-list > li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .dash-list > li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(0.5lh - 0.5px);
+    width: 0.625rem;
+    height: 1px;
+    background-color: var(--color-line-strong);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Revelação ao rolar.
+   O estado inicial só existe quando o script adiciona .js ao <html>;
+   sem JavaScript o conteúdo aparece normalmente. */
+/* Mesmos valores do template (Framer Motion): 800ms, easeOut, 40px. */
+.js [data-reveal] {
+  --reveal-duration: 800ms;
+  --reveal-distance: 40px;
+  --reveal-ease: cubic-bezier(0, 0, 0.58, 1);
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-distance), 0);
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease),
+    transform var(--reveal-duration) var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Título grande do contato: entrada mais longa, como no template. */
+.js [data-reveal='slow'] {
+  --reveal-duration: 1000ms;
+  --reveal-distance: 60px;
+}
+
+.js [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}

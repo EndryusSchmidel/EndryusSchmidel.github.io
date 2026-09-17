@@ -1,0 +1,39 @@
+---
+import type { Dictionary } from '../i18n';
+import Section from './Section.astro';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+const { degree } = t.education;
+---
+
+<Section id="education" eyebrow={t.education.eyebrow} title={t.education.title}>
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-17">
+    <article data-reveal class="border-t border-line pt-6">
+      <h3 class="mb-2 text-xl font-light text-fg md:text-2xl">{degree.course}</h3>
+      <p class="text-muted">{degree.institution}</p>
+      <p class="mt-2 flex flex-wrap gap-x-3 text-sm text-subtle">
+        <span>{degree.period}</span>
+        <span>({degree.status})</span>
+      </p>
+    </article>
+
+    <div data-reveal>
+      <h3 class="mb-6 text-sm tracking-(--tracking-label) text-subtle uppercase">
+        {t.education.certificationsTitle}
+      </h3>
+      <ul class="space-y-4">
+        {
+          t.education.certifications.map((c) => (
+            <li class="border-t border-line pt-4 text-sm leading-relaxed text-soft first:border-t-0 first:pt-0 lg:text-base">
+              {c}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</Section>

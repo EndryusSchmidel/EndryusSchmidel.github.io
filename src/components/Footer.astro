@@ -1,0 +1,16 @@
+---
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-bg-alt">
+  <div class="page-container">
+    <p class="border-t border-line py-8 text-xs text-subtle">© {year} {t.footer.text}</p>
+  </div>
+</footer>

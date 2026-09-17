@@ -1,0 +1,24 @@
+---
+import type { Dictionary } from '../i18n';
+import Section from './Section.astro';
+import Tags from './Tags.astro';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<Section id="stack" eyebrow={t.stack.eyebrow} title={t.stack.title} alt>
+  <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:gap-17">
+    {
+      t.stack.groups.map((group) => (
+        <div data-reveal>
+          <h3 class="mb-6 text-sm tracking-(--tracking-label) text-subtle uppercase">{group.title}</h3>
+          <Tags items={group.items} size="md" />
+        </div>
+      ))
+    }
+  </div>
+</Section>

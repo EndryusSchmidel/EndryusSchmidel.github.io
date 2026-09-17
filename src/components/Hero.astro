@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import type { Dictionary } from '../i18n';
+import photo from '../assets/fff.png';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<header class="relative w-full overflow-hidden pt-20 pb-16 sm:pt-24 sm:pb-20 md:flex md:min-h-svh md:items-center md:py-0">
+  {/*
+    Recorte com fundo transparente, sem degradê (não há foto atrás do texto para
+    escurecer). Abaixo de 768px o texto ocupa quase toda a largura e não há espaço
+    ao lado, então a foto vai empilhada, centralizada, ANTES do texto (ordem normal
+    do documento). A partir de 768px ela vira um elemento ancorado no canto direito,
+    com largura controlando o tamanho até 1024px, e depois altura, como na simulação.
+  */}
+  <Image
+    src={photo}
+    alt={t.hero.photoAlt}
+    width={1303}
+    height={1207}
+    widths={[350, 500, 700, 900, 1100, 1303]}
+    sizes="(min-width: 1280px) 40vw, (min-width: 768px) 33vw, 50vw"
+    quality={90}
+    loading="eager"
+    fetchpriority="high"
+    class="pointer-events-none relative mx-auto mb-8 block h-auto w-[52vw] max-w-[280px] grayscale sm:mb-10 sm:w-[46vw] sm:max-w-[320px] md:absolute md:right-12 md:bottom-0 md:mx-0 md:mb-0 md:w-[38vw] md:max-w-[420px] lg:w-[40vw] lg:max-w-[480px] xl:right-16 xl:h-[75vh] xl:w-auto xl:max-w-none"
+  />
+
+  <div class="page-container relative z-10">
+    <h1 class="font-display text-[15vw] leading-[0.85] text-fg sm:text-[9vw] lg:text-hero">
+      <span class="block">Endryus</span>
+      <span class="block">Schmidel</span>
+    </h1>
+
+    <p class="mt-6 text-lg font-light text-soft md:mt-8 md:text-xl lg:text-2xl">
+      {t.hero.subtitle}
+    </p>
+
+    <p class="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+      {t.hero.lead}
+    </p>
+
+    <p class="mt-8 text-sm tracking-wider text-subtle">{t.hero.location}</p>
+  </div>
+</header>

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.env*
+.DS_Store
+
+# Protótipo de referência (Lovable) — só serviu de base visual, não faz parte do site.
+lovable/

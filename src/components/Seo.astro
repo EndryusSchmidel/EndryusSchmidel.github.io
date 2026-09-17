@@ -1,0 +1,99 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { locales, type Dictionary, type Locale } from '../i18n';
+import { profile } from '../site';
+
+interface Props {
+  locale: Locale;
+  t: Dictionary;
+  alternates: Record<Locale, Dictionary>;
+}
+
+const { locale, t, alternates } = Astro.props;
+
+// Todas as URLs absolutas saem de Astro.site (definido em astro.config.mjs).
+const site = Astro.site;
+if (!site) throw new Error('Defina `site` em astro.config.mjs.');
+
+const absolute = (path: string) => new URL(path, site).href;
+const localeUrl = (l: Locale) => absolute(getRelativeLocaleUrl(l));
+
+const canonical = localeUrl(locale);
+const ogImage = absolute(`/og-${locale}.png`);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  url: canonical,
+  image: absolute('/og-pt.png'),
+  jobTitle: t.person.jobTitle,
+  description: t.person.description,
+  email: `mailto:${profile.email}`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Rio de Janeiro',
+    addressRegion: 'RJ',
+    addressCountry: 'BR',
+  },
+  sameAs: [profile.github, profile.linkedin, profile.instagram],
+  knowsAbout: profile.knowsAbout,
+  alumniOf: {
+    '@type': 'EducationalOrganization',
+    name: profile.alumniOf.name,
+  },
+};
+
+// Evita que "</script>" em alguma string feche a tag prematuramente.
+const jsonLdString = JSON.stringify(jsonLd).replace(/</g, '\\u003c');
+---
+
+<title>{t.meta.title}</title>
+<meta name="description" content={t.meta.description} />
+<meta name="author" content={profile.name} />
+{
+  /*
+    TODO(domínio definitivo): enquanto o site estiver em *.vercel.app, fica "noindex, nofollow".
+    Quando o domínio definitivo entrar (e `site` for atualizado em astro.config.mjs),
+    troque o content abaixo para "index, follow".
+  */
+}
+<meta name="robots" content="noindex, nofollow" />
+<link rel="canonical" href={canonical} />
+
+{
+  locales.map((l) => (
+    <link rel="alternate" hreflang={alternates[l].meta.htmlLang} href={localeUrl(l)} />
+  ))
+}
+<link rel="alternate" hreflang="x-default" href={localeUrl('pt')} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="profile" />
+<meta property="og:site_name" content={profile.name} />
+<meta property="og:title" content={t.meta.title} />
+<meta property="og:description" content={t.meta.description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={t.meta.ogLocale} />
+{
+  locales
+    .filter((l) => l !== locale)
+    .map((l) => <meta property="og:locale:alternate" content={alternates[l].meta.ogLocale} />)
+}
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:secure_url" content={ogImage} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={t.meta.ogImageAlt} />
+<meta property="profile:first_name" content="Endryus" />
+<meta property="profile:last_name" content="Schmidel" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={t.meta.title} />
+<meta name="twitter:description" content={t.meta.description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={t.meta.ogImageAlt} />
+
+<script type="application/ld+json" is:inline set:html={jsonLdString} />

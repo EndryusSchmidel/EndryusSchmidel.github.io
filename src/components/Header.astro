@@ -1,0 +1,208 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { locales, type Dictionary, type Locale } from '../i18n';
+import { en } from '../i18n/en';
+import { pt } from '../i18n/pt';
+import { profile } from '../site';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+  t: Dictionary;
+}
+
+const { locale, t } = Astro.props;
+const all: Record<Locale, Dictionary> = { pt, en };
+
+const links = [
+  { id: 'about', label: t.nav.about },
+  { id: 'experience', label: t.nav.experience },
+  { id: 'projects', label: t.nav.projects },
+  { id: 'stack', label: t.nav.stack },
+  { id: 'education', label: t.nav.education },
+  { id: 'contact', label: t.nav.contact },
+];
+---
+
+<a
+  href="#main"
+  class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-md focus:bg-chip focus:px-4 focus:py-2 focus:text-fg"
+>
+  {t.a11y.skipToContent}
+</a>
+
+{/*
+  O menu de seções (nav.side-nav mais abaixo) só existe a partir de 768px, no
+  cantinho inferior direito; abaixo disso vira um botão de WhatsApp (também mais
+  abaixo). Este cabeçalho fixo no topo carrega apenas o alternador PT | EN e, a
+  partir de 1024px, os links diretos.
+*/}
+<header
+  class="fixed inset-x-0 top-0 z-50 border-b border-line/80 bg-bg/85 backdrop-blur-md md:left-auto md:border-0 md:bg-transparent md:backdrop-blur-none"
+>
+  <div class="flex h-14 items-center justify-end gap-4 px-5 md:h-auto md:px-10 md:pt-8">
+    {/*
+      Links diretos (GitHub/LinkedIn/WhatsApp): só a partir de 1024px, ao lado do PT | EN.
+      Em telas menores esses links continuam acessíveis pelo Contato (e o WhatsApp
+      também vira o botão fixo do canto abaixo de 768px).
+    */}
+    <ul
+      aria-label={t.a11y.socialLinks}
+      class="hidden shrink-0 items-center gap-6 text-sm text-muted lg:flex"
+    >
+      <li>
+        <a
+          href={profile.github}
+          target="_blank"
+          rel="noopener"
+          class="transition-colors duration-150 hover:text-fg"
+        >
+          GitHub
+          <span class="sr-only"> ({t.a11y.opensInNewTab})</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href={profile.linkedin}
+          target="_blank"
+          rel="noopener"
+          class="transition-colors duration-150 hover:text-fg"
+        >
+          LinkedIn
+          <span class="sr-only"> ({t.a11y.opensInNewTab})</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href={`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(t.contact.quickMessage)}`}
+          target="_blank"
+          rel="noopener"
+          class="transition-colors duration-150 hover:text-fg"
+        >
+          WhatsApp
+          <span class="sr-only"> ({t.a11y.opensInNewTab})</span>
+        </a>
+      </li>
+    </ul>
+
+    <span class="hidden h-4 w-px shrink-0 bg-line lg:block" aria-hidden="true"></span>
+
+    <div
+      role="group"
+      aria-label={t.a11y.languageSwitcher}
+      class="flex shrink-0 items-center text-xs tracking-(--tracking-label) uppercase"
+    >
+      {
+        locales.map((l, i) => (
+          <>
+            {i > 0 && (
+              <span class="px-0.5 text-line-strong select-none" aria-hidden="true">
+                |
+              </span>
+            )}
+            {l === locale ? (
+              <span aria-current="true" class="px-1.5 py-2 text-fg" lang={all[l].meta.htmlLang}>
+                {l.toUpperCase()}
+              </span>
+            ) : (
+              <a
+                href={getRelativeLocaleUrl(l)}
+                hreflang={all[l].meta.htmlLang}
+                lang={all[l].meta.htmlLang}
+                data-lang-link
+                class="px-1.5 py-2 text-subtle transition-colors duration-150 hover:text-fg"
+              >
+                {l.toUpperCase()}
+                <span class="sr-only"> — {all[l].a11y.switchTo}</span>
+              </a>
+            )}
+          </>
+        ))
+      }
+    </div>
+  </div>
+</header>
+
+{/*
+  Abaixo de 768px a tela é estreita demais pro menu de seções ficar fixo num
+  canto sem tampar texto o tempo todo — no lugar dele entra um botão de
+  WhatsApp, direto e sempre útil nesse tamanho de tela.
+*/}
+<a
+  href={`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(t.contact.quickMessage)}`}
+  target="_blank"
+  rel="noopener"
+  aria-label={`WhatsApp (${t.a11y.opensInNewTab})`}
+  class="fixed right-5 bottom-5 z-40 grid size-12 place-items-center rounded-full border border-line bg-chip text-fg transition-colors duration-150 hover:border-line-strong md:hidden"
+>
+  <Icon name="whatsapp" size={22} />
+</a>
+
+{/*
+  Menu de seções (>= 768px). Fica no trilho direito que o .page-container
+  reserva, então não cobre texto em nenhuma altura de viewport.
+*/}
+<nav
+  aria-label={t.a11y.mainNav}
+  class="side-nav fixed right-0 bottom-0 z-40 hidden p-8 md:block lg:p-10"
+>
+  <ul class="flex flex-col items-end gap-3 text-sm">
+    {
+      links.map((link) => (
+        <li>
+          <a
+            href={`#${link.id}`}
+            class="relative block py-1 text-muted transition-colors duration-150 after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-fg after:transition-transform after:duration-150 hover:text-fg hover:after:origin-left hover:after:scale-x-100"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  /* Em janelas muito baixas (desktop) o menu não cabe abaixo do alternador de idioma. */
+  @media (min-width: 768px) and (max-height: 420px) {
+    .side-nav {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Ao trocar de idioma, leva para a mesma seção em vez do topo da página.
+  // Não usa a posição em pixels porque PT e EN têm tamanhos de texto diferentes;
+  // usa o id da seção, que existe nas duas versões.
+  (function () {
+    var links = document.querySelectorAll('[data-lang-link]');
+    if (!links.length) return;
+
+    function currentSectionId() {
+      var sections = document.querySelectorAll('main > section[id]');
+      var threshold = 140; // px do topo — evita trocar de seção só por encostar nela
+      var current = null;
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].getBoundingClientRect().top <= threshold) {
+          current = sections[i].id;
+        }
+      }
+      return current;
+    }
+
+    links.forEach(function (link) {
+      link.addEventListener('click', function () {
+        var id = currentSectionId();
+        if (!id) return;
+        try {
+          var url = new URL(link.href);
+          url.hash = id;
+          link.href = url.href;
+        } catch (e) {
+          // se algo der errado, mantém o link original (vai para o topo)
+        }
+      });
+    });
+  })();
+</script>

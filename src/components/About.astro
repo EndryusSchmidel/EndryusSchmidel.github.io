@@ -1,0 +1,22 @@
+---
+import type { Dictionary } from '../i18n';
+import Section from './Section.astro';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<Section id="about" eyebrow={t.about.eyebrow} title={t.about.title}>
+  <div class="max-w-3xl space-y-8">
+    {
+      t.about.paragraphs.map((p) => (
+        <p data-reveal class="text-lg leading-relaxed font-light text-soft md:text-xl lg:text-2xl">
+          {p}
+        </p>
+      ))
+    }
+  </div>
+</Section>

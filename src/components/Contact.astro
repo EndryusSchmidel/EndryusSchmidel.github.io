@@ -1,0 +1,43 @@
+---
+import type { Dictionary } from '../i18n';
+import { profile } from '../site';
+import Section from './Section.astro';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+
+const whatsappUrl = `https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(t.contact.whatsappMessage)}`;
+
+const channels = [
+  { label: 'WhatsApp', href: whatsappUrl, external: true },
+  { label: profile.email, href: `mailto:${profile.email}`, external: false },
+  { label: 'GitHub', href: profile.github, external: true },
+  { label: 'LinkedIn', href: profile.linkedin, external: true },
+] as const;
+---
+
+<Section id="contact" eyebrow={t.contact.eyebrow} title={t.contact.title} size="hero" alt>
+  <div data-reveal aria-hidden="true" class="mb-10 h-px w-full bg-line-strong lg:mb-11"></div>
+
+  <p data-reveal class="mb-8 text-muted">{t.contact.lead}</p>
+
+  <ul class="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-x-8 md:gap-x-16">
+    {
+      channels.map((c) => (
+        <li data-reveal>
+          <a
+            href={c.href}
+            {...(c.external ? { target: '_blank', rel: 'noopener' } : {})}
+            class="text-lg break-all text-soft underline decoration-line-strong underline-offset-4 transition-colors duration-150 hover:text-fg hover:decoration-fg lg:text-xl"
+          >
+            {c.label}
+            {c.external && <span class="sr-only"> ({t.a11y.opensInNewTab})</span>}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

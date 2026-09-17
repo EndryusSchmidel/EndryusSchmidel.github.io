@@ -1,0 +1,97 @@
+---
+import { Font } from 'astro:assets';
+import Seo from '../components/Seo.astro';
+import { en } from '../i18n/en';
+import { pt } from '../i18n/pt';
+import type { Dictionary, Locale } from '../i18n';
+import '../styles/global.css';
+
+interface Props {
+  locale: Locale;
+  t: Dictionary;
+}
+
+const { locale, t } = Astro.props;
+---
+
+<!doctype html>
+<html lang={t.meta.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-bebas" preload />
+
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+
+    <Seo locale={locale} t={t} alternates={{ pt, en }} />
+  </head>
+  <body class="min-h-dvh overflow-x-hidden bg-bg text-fg antialiased">
+    <slot />
+
+    <script is:inline>
+      (function () {
+        var targets = document.querySelectorAll('[data-reveal]');
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function done(el) {
+          el.removeAttribute('data-reveal');
+          el.classList.remove('is-revealed');
+          el.style.removeProperty('--reveal-delay');
+        }
+
+        if (reduced || !('IntersectionObserver' in window)) {
+          targets.forEach(done);
+          return;
+        }
+
+        // Intervalo entre irmãos que entram juntos (template: 100–150ms).
+        var STAGGER = 130;
+        // Maior duração usada no CSS ([data-reveal='slow']).
+        var MAX_DURATION = 1000;
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            var counters = new Map();
+            entries
+              .filter(function (entry) {
+                return entry.isIntersecting;
+              })
+              .forEach(function (entry) {
+                var el = entry.target;
+                var parent = el.parentElement;
+                var index = counters.get(parent) || 0;
+                counters.set(parent, index + 1);
+
+                var delay = index * STAGGER;
+                el.style.setProperty('--reveal-delay', delay + 'ms');
+                el.classList.add('is-revealed');
+                observer.unobserve(el);
+
+                // Ao final, devolve o elemento ao estado normal para que as
+                // transições de hover (150ms) não herdem a duração da entrada.
+                setTimeout(function () {
+                  done(el);
+                }, delay + MAX_DURATION + 50);
+              });
+          },
+          // Como o template: o elemento começa a surgir quando já está 100px dentro da tela.
+          { rootMargin: '0px 0px -100px 0px', threshold: 0 }
+        );
+
+        targets.forEach(function (el) {
+          observer.observe(el);
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+// Em build estático gera um HTML com meta refresh para /pt.
+// Na Vercel, o vercel.json responde antes com um redirect 308.
+return Astro.redirect(getRelativeLocaleUrl('pt'), 308);
+---

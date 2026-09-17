@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import type { Dictionary } from '../i18n';
+import Icon from './Icon.astro';
+import Section from './Section.astro';
+import Tags from './Tags.astro';
+import verbiBeauty from '../assets/projects/verbi-beauty.png';
+import hospitalManagement from '../assets/projects/hospital-management.png';
+
+interface Props {
+  t: Dictionary;
+}
+
+const { t } = Astro.props;
+
+// Capturas das aplicações em produção (verbi-beauty.png e hospital-management.png),
+// na mesma ordem de t.projects.items nos dois idiomas.
+const images = [verbiBeauty, hospitalManagement];
+---
+
+<Section id="projects" eyebrow={t.projects.eyebrow} title={t.projects.title}>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+    {
+      t.projects.items.map((project, i) => (
+        <article
+          data-reveal
+          class="group flex flex-col overflow-hidden rounded-lg border border-line transition-colors duration-150 hover:border-line-strong"
+        >
+          <div class="aspect-16/10 overflow-hidden bg-chip">
+            <Image
+              src={images[i]}
+              alt={project.imageAlt}
+              width={800}
+              height={500}
+              fit="cover"
+              widths={[400, 600, 800, 1200]}
+              sizes="(min-width: 768px) 50vw, 100vw"
+              class="block h-full w-full object-cover grayscale transition-[filter] duration-500 ease-out group-hover:grayscale-0"
+            />
+          </div>
+
+          <div class="flex flex-1 flex-col p-6 md:p-8">
+            <div class="mb-6">
+              <h3 class="text-xl font-light text-fg md:text-2xl xl:text-3xl">{project.title}</h3>
+              {project.subtitle && <p class="mt-1 text-sm text-subtle">{project.subtitle}</p>}
+            </div>
+
+            <p class="flex-1 text-sm leading-relaxed text-muted lg:text-base">{project.description}</p>
+
+            {project.tags.length > 0 && (
+              <div class="mt-6">
+                <Tags items={project.tags} />
+              </div>
+            )}
+
+            <ul class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-6 text-sm">
+              {project.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener"
+                    class="group/link inline-flex items-center gap-1 py-1 text-muted underline decoration-line-strong underline-offset-4 transition-colors duration-150 hover:text-fg hover:decoration-fg"
+                  >
+                    {link.label}
+                    <span class="sr-only"> ({t.a11y.opensInNewTab})</span>
+                    <Icon
+                      name="arrow-up-right"
+                      size={14}
+                      class="transition-transform duration-150 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</Section>

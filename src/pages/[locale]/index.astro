@@ -1,0 +1,34 @@
+---
+import About from '../../components/About.astro';
+import Contact from '../../components/Contact.astro';
+import Education from '../../components/Education.astro';
+import Experience from '../../components/Experience.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import Projects from '../../components/Projects.astro';
+import Stack from '../../components/Stack.astro';
+import { getDictionary, locales, type Locale } from '../../i18n';
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const t = getDictionary(locale);
+---
+
+<Layout locale={locale} t={t}>
+  <Header locale={locale} t={t} />
+  <main id="main" tabindex="-1" class="outline-none">
+    <Hero t={t} />
+    <About t={t} />
+    <Experience t={t} />
+    <Projects t={t} />
+    <Stack t={t} />
+    <Education t={t} />
+    <Contact t={t} />
+  </main>
+  <Footer t={t} />
+</Layout>

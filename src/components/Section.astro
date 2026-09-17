@@ -1,0 +1,41 @@
+---
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  /** Fundo levemente mais claro, alternando seções como no protótipo */
+  alt?: boolean;
+  /** "hero" para o título grande da seção de contato */
+  size?: 'section' | 'hero';
+}
+
+const { id, eyebrow, title, alt = false, size = 'section' } = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-title`}
+  class:list={['section-padding', alt ? 'bg-bg-alt' : 'bg-bg']}
+>
+  <div class="page-container">
+    <div data-reveal class="mb-10 md:mb-11">
+      <p class="text-sm tracking-(--tracking-label) text-subtle uppercase">{eyebrow}</p>
+      <span aria-hidden="true" class="mt-2 block h-px w-6 bg-line-strong"></span>
+    </div>
+
+    <h2
+      id={`${id}-title`}
+      data-reveal={size === 'hero' ? 'slow' : ''}
+      class:list={[
+        'font-display text-fg',
+        size === 'hero'
+          ? 'mb-10 text-[10.2vw] leading-[0.85] lg:text-hero'
+          : 'mb-11 text-[8.5vw] leading-[0.85] lg:mb-17 lg:text-section',
+      ]}
+    >
+      {title}
+    </h2>
+
+    <slot />
+  </div>
+</section>
