@@ -51,14 +51,7 @@ const jsonLdString = JSON.stringify(jsonLd).replace(/</g, '\\u003c');
 <title>{t.meta.title}</title>
 <meta name="description" content={t.meta.description} />
 <meta name="author" content={profile.name} />
-{
-  /*
-    TODO(domínio definitivo): enquanto o site estiver em *.vercel.app, fica "noindex, nofollow".
-    Quando o domínio definitivo entrar (e `site` for atualizado em astro.config.mjs),
-    troque o content abaixo para "index, follow".
-  */
-}
-<meta name="robots" content="noindex, nofollow" />
+<meta name="robots" content="index, follow" />
 <link rel="canonical" href={canonical} />
 
 {
