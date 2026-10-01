@@ -38,6 +38,11 @@ const jsonLd = {
   },
   sameAs: [profile.github, profile.linkedin, profile.instagram],
   knowsAbout: profile.knowsAbout,
+  worksFor: {
+    '@type': 'Organization',
+    name: profile.company.name,
+    url: profile.company.url,
+  },
   alumniOf: {
     '@type': 'EducationalOrganization',
     name: profile.alumniOf.name,

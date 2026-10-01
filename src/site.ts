@@ -17,4 +17,5 @@ export const profile = {
     'Application Security',
   ],
   alumniOf: { name: 'Uninter' },
+  company: { name: 'Verbinden Tecnologia', url: 'https://verbinden.com.br' },
 } as const;

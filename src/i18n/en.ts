@@ -8,7 +8,7 @@ export const en: Dictionary = {
     ogLocale: 'en_US',
     title: 'Endryus Schmidel — Full-Stack Developer',
     description:
-      'Full-stack developer based in Rio de Janeiro. Java, Spring Boot and React, focused on application security, multi-tenancy and access control.',
+      'Full-stack developer and co-founder of Verbinden Tecnologia, based in Rio de Janeiro. Java, Spring Boot and React, focused on application security, multi-tenancy and access control.',
     ogImageAlt: 'Endryus Schmidel, full-stack developer. Java, Spring Boot and React.',
   },
   a11y: {
@@ -30,11 +30,12 @@ export const en: Dictionary = {
   person: {
     jobTitle: 'Full-Stack Developer',
     description:
-      'Full-stack developer based in Rio de Janeiro. Java, Spring Boot and React, with a focus on application security.',
+      'Full-stack developer and co-founder of Verbinden Tecnologia, based in Rio de Janeiro. Java, Spring Boot and React, with a focus on application security.',
   },
   hero: {
     photoAlt: 'Photo of Endryus Schmidel',
     subtitle: 'Full-stack developer. Java, Spring Boot and React.',
+    companyRole: 'Co-founder of',
     lead: "I build systems where security and access control aren't an afterthought — they're architecture.",
     location: 'Rio de Janeiro',
   },
@@ -42,9 +43,10 @@ export const en: Dictionary = {
     eyebrow: 'Profile',
     title: 'About',
     paragraphs: [
-      "Full-stack developer, currently responsible for building and maintaining a telemedicine platform in production at Plugpix, where I also guide the development and support team.",
-      "In parallel, I'm a co-founder of Verbinden, where I'm building a multi-tenant SaaS for managing clinics and salons alongside another engineer. It's currently in the final stretch before launch.",
-      "My technical focus is application security. In practice, that means I design for tenant data isolation, role-based access control and change auditing, and I test my own systems for authorization flaws such as IDOR and BOLA. I've been studying offensive security for about a year and plan to move into the field professionally.",
+      "I'm a co-founder of Verbinden Tecnologia, a Rio de Janeiro company behind Verbi Beauty, a management system for salons, barbershops, nail studios and beauty studios, and behind Agência Verbinden, which builds custom websites and runs ads for professionals and service businesses.",
+      "I build Verbi Beauty together with my business partner, splitting backend and frontend between us. He leads the architecture decisions; I own the application security layer. I also run the agency's projects, from proposal to launch.",
+      "Application security is the technical area I identify with the most. In practice, that means I design for tenant data isolation, role-based access control and change auditing, and I test my own systems for authorization flaws such as IDOR and BOLA.",
+      'In parallel, I work as a developer at Plugpix, evolving a telemedicine platform in production.',
     ],
   },
   experience: {
@@ -53,30 +55,30 @@ export const en: Dictionary = {
     currentLabel: 'current',
     items: [
       {
-        role: 'Developer',
-        company: 'Plugpix',
-        period: 'Since mid-2026',
+        role: 'Co-founder & Developer',
+        company: 'Verbinden Tecnologia',
+        period: 'Since March 2026',
         location: 'Rio de Janeiro',
         current: true,
         description:
-          'Responsible for developing and evolving a telemedicine platform in production. Bug fixing, shipping new features and distributing work to the support and development teams.',
-        highlights: [],
-        tags: ['TypeScript', 'React', 'PostgreSQL'],
-      },
-      {
-        role: 'Co-founder & Developer',
-        company: 'Verbinden',
-        period: '2026',
-        location: 'Remote',
-        current: false,
-        description:
-          'Multi-tenant SaaS for managing clinics and beauty salons, built as a two-person team with a senior engineer. Responsible for the frontend and the application security layer.',
+          'Building Verbi Beauty, a multi-tenant SaaS for managing salons, barbershops, nail studios and beauty studios, as a two-person team with my business partner: backend and frontend split between us, with the application security layer under my responsibility. I also run Agência Verbinden projects.',
         highlights: [
           'Logical tenant data isolation in PostgreSQL',
           'Authentication and authorization with Spring Security and JWT',
           'Mitigation of authorization flaws (IDOR, BOLA) across the REST APIs',
         ],
         tags: ['Java 24', 'Spring Boot 3.4', 'React 18', 'TypeScript', 'Tailwind'],
+      },
+      {
+        role: 'Mid-level Software Developer',
+        company: 'Plugpix',
+        period: 'Since June 2026',
+        location: 'Remote',
+        current: true,
+        description:
+          'Responsible for developing and evolving a telemedicine platform in production. Bug fixing, shipping new features and distributing work to the support and development teams.',
+        highlights: [],
+        tags: ['TypeScript', 'React', 'PostgreSQL'],
       },
     ],
   },
@@ -88,10 +90,13 @@ export const en: Dictionary = {
         title: 'Verbi Beauty',
         subtitle: 'Verbinden',
         description:
-          'Management, financial control and no-show reduction platform for salons, barbershops and aesthetic clinics. In the final stage of development. Private source code.',
+          'Management system for salons, barbershops, nail studios and beauty studios: team schedule, Pix deposits on online booking and rule-based commissions. In the final stretch before launch. Private source code.',
         imageAlt: "Verbi Beauty dashboard showing today's schedule, revenue and upcoming appointments",
         tags: [],
-        links: [{ label: 'beauty.verbinden.com.br', href: 'https://beauty.verbinden.com.br' }],
+        links: [
+          { label: 'beauty.verbinden.com.br', href: 'https://beauty.verbinden.com.br' },
+          { label: 'verbinden.com.br', href: 'https://verbinden.com.br' },
+        ],
       },
       {
         title: 'Hospital Management System',

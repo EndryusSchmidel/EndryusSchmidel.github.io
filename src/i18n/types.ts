@@ -61,6 +61,8 @@ export interface Dictionary {
   hero: {
     photoAlt: string;
     subtitle: string;
+    /** Texto antes do nome da empresa, que vira link (ex.: "Cofundador da") */
+    companyRole: string;
     lead: string;
     location: string;
   };

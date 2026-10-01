@@ -6,7 +6,7 @@ export const pt: Dictionary = {
     ogLocale: 'pt_BR',
     title: 'Endryus Schmidel — Desenvolvedor Full-Stack',
     description:
-      'Desenvolvedor full-stack no Rio de Janeiro. Java, Spring Boot e React, com foco em segurança de aplicações, multi-tenancy e controle de acesso.',
+      'Desenvolvedor full-stack e cofundador da Verbinden Tecnologia, no Rio de Janeiro. Java, Spring Boot e React, com foco em segurança de aplicações, multi-tenancy e controle de acesso.',
     ogImageAlt: 'Endryus Schmidel, desenvolvedor full-stack. Java, Spring Boot e React.',
   },
   a11y: {
@@ -28,11 +28,12 @@ export const pt: Dictionary = {
   person: {
     jobTitle: 'Desenvolvedor Full-Stack',
     description:
-      'Desenvolvedor full-stack no Rio de Janeiro. Java, Spring Boot e React, com foco em segurança de aplicações.',
+      'Desenvolvedor full-stack e cofundador da Verbinden Tecnologia, no Rio de Janeiro. Java, Spring Boot e React, com foco em segurança de aplicações.',
   },
   hero: {
     photoAlt: 'Foto de Endryus Schmidel',
     subtitle: 'Desenvolvedor full-stack. Java, Spring Boot e React.',
+    companyRole: 'Cofundador da',
     lead: 'Construo sistemas onde segurança e controle de acesso não são adendo, são arquitetura.',
     location: 'Rio de Janeiro',
   },
@@ -40,9 +41,10 @@ export const pt: Dictionary = {
     eyebrow: 'Perfil',
     title: 'Sobre',
     paragraphs: [
-      'Desenvolvedor full-stack, atualmente responsável pelo desenvolvimento e manutenção de uma plataforma de telemedicina em produção na Plugpix, onde também oriento a equipe de desenvolvimento e suporte.',
-      'Em paralelo, sou cofundador da Verbinden, onde desenvolvo com outro engenheiro um SaaS multi-tenant para gestão de clínicas e salões, atualmente em fase final antes do lançamento.',
-      'Meu interesse técnico está concentrado em segurança de aplicações. Na prática isso significa que construo pensando em isolamento de dados entre tenants, controle de acesso por função e auditoria de alterações, e que testo meus próprios sistemas procurando falhas de autorização como IDOR e BOLA. Estudo segurança ofensiva há cerca de um ano e pretendo migrar para a área profissionalmente.',
+      'Sou cofundador da Verbinden Tecnologia, empresa do Rio de Janeiro por trás do Verbi Beauty, sistema de gestão para salões, barbearias, esmalterias e estúdios, e da Agência Verbinden, que cria sites sob medida e cuida de anúncios para profissionais e empresas de serviços.',
+      'Desenvolvo o Verbi Beauty em dupla com o meu sócio, dividindo backend e frontend. Ele conduz as decisões de arquitetura; eu respondo pela camada de segurança da aplicação. Também conduzo os projetos da agência, da proposta à publicação.',
+      'Segurança de aplicações é a área técnica com que mais me identifico. Na prática, construo pensando em isolamento de dados entre tenants, controle de acesso por função e auditoria de alterações, e testo meus próprios sistemas procurando falhas de autorização como IDOR e BOLA.',
+      'Em paralelo, atuo como desenvolvedor na Plugpix, onde cuido da evolução de uma plataforma de telemedicina em produção.',
     ],
   },
   experience: {
@@ -51,30 +53,30 @@ export const pt: Dictionary = {
     currentLabel: 'atual',
     items: [
       {
-        role: 'Desenvolvedor',
-        company: 'Plugpix',
-        period: 'Desde meados de 2026',
+        role: 'Cofundador e Desenvolvedor',
+        company: 'Verbinden Tecnologia',
+        period: 'Desde março de 2026',
         location: 'Rio de Janeiro',
         current: true,
         description:
-          'Responsável pelo desenvolvimento e evolução de uma plataforma de telemedicina em produção. Correção de falhas, implementação de novas funcionalidades e distribuição de demandas para a equipe de suporte e a equipe de desenvolvimento.',
-        highlights: [],
-        tags: ['TypeScript', 'React', 'PostgreSQL'],
-      },
-      {
-        role: 'Cofundador e Desenvolvedor',
-        company: 'Verbinden',
-        period: '2026',
-        location: 'Remoto',
-        current: false,
-        description:
-          'SaaS multi-tenant para gestão de clínicas e salões de beleza, desenvolvido em dupla com um engenheiro sênior. Responsável pelo frontend e pela camada de segurança da aplicação.',
+          'Desenvolvimento do Verbi Beauty, SaaS multi-tenant de gestão para salões, barbearias, esmalterias e estúdios, em dupla com o meu sócio: backend e frontend divididos entre nós, com a camada de segurança da aplicação sob minha responsabilidade. Também conduzo os projetos da Agência Verbinden.',
         highlights: [
           'Isolamento lógico de dados entre tenants no PostgreSQL',
           'Autenticação e autorização com Spring Security e JWT',
           'Mitigação de falhas de autorização (IDOR, BOLA) nas APIs REST',
         ],
         tags: ['Java 24', 'Spring Boot 3.4', 'React 18', 'TypeScript', 'Tailwind'],
+      },
+      {
+        role: 'Desenvolvedor de Software Pleno',
+        company: 'Plugpix',
+        period: 'Desde junho de 2026',
+        location: 'Remoto',
+        current: true,
+        description:
+          'Responsável pelo desenvolvimento e evolução de uma plataforma de telemedicina em produção. Correção de falhas, implementação de novas funcionalidades e distribuição de demandas para a equipe de suporte e a equipe de desenvolvimento.',
+        highlights: [],
+        tags: ['TypeScript', 'React', 'PostgreSQL'],
       },
     ],
   },
@@ -86,11 +88,14 @@ export const pt: Dictionary = {
         title: 'Verbi Beauty',
         subtitle: 'Verbinden',
         description:
-          'Plataforma de gestão, controle financeiro e redução de no-show para salões, barbearias e clínicas de estética. Em fase final de desenvolvimento. Código privado.',
+          'Sistema de gestão para salões, barbearias, esmalterias e estúdios: agenda da equipe, sinal por Pix no agendamento online e comissões calculadas por regra. Em fase final antes do lançamento. Código privado.',
         imageAlt:
           'Painel do Verbi Beauty mostrando a agenda do dia, faturamento e os próximos agendamentos',
         tags: [],
-        links: [{ label: 'beauty.verbinden.com.br', href: 'https://beauty.verbinden.com.br' }],
+        links: [
+          { label: 'beauty.verbinden.com.br', href: 'https://beauty.verbinden.com.br' },
+          { label: 'verbinden.com.br', href: 'https://verbinden.com.br' },
+        ],
       },
       {
         title: 'Hospital Management System',
