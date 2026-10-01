@@ -18,6 +18,17 @@ export interface ExperienceItem {
   tags: string[];
 }
 
+export interface CertificationItem {
+  name: string;
+  issuer: string;
+  /** Ano de emissão; omitido quando não se sabe */
+  year?: string;
+  /** Link público para verificar a credencial */
+  href?: string;
+  /** Ainda não concluída: aparece por último, mais discreta */
+  inProgress?: boolean;
+}
+
 export interface ProjectItem {
   title: string;
   subtitle?: string;
@@ -100,10 +111,12 @@ export interface Dictionary {
       course: string;
       institution: string;
       period: string;
-      status: string;
     };
     certificationsTitle: string;
-    certifications: string[];
+    /** Texto do link de verificação de cada certificação */
+    credentialLabel: string;
+    inProgressLabel: string;
+    certifications: CertificationItem[];
   };
   contact: {
     /** Rótulo pequeno em caixa alta exibido acima do título */

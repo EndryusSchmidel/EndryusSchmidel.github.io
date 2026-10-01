@@ -1,5 +1,6 @@
 ---
 import type { Dictionary } from '../i18n';
+import Icon from './Icon.astro';
 import Section from './Section.astro';
 
 interface Props {
@@ -8,6 +9,11 @@ interface Props {
 
 const { t } = Astro.props;
 const { degree } = t.education;
+
+// Concluídas primeiro; as em andamento vão para o fim da lista.
+const certifications = [...t.education.certifications].sort(
+  (a, b) => Number(!!a.inProgress) - Number(!!b.inProgress),
+);
 ---
 
 <Section id="education" eyebrow={t.education.eyebrow} title={t.education.title}>
@@ -15,10 +21,7 @@ const { degree } = t.education;
     <article data-reveal class="border-t border-line pt-6">
       <h3 class="mb-2 text-xl font-light text-fg md:text-2xl">{degree.course}</h3>
       <p class="text-muted">{degree.institution}</p>
-      <p class="mt-2 flex flex-wrap gap-x-3 text-sm text-subtle">
-        <span>{degree.period}</span>
-        <span>({degree.status})</span>
-      </p>
+      <p class="mt-2 text-sm text-subtle">{degree.period}</p>
     </article>
 
     <div data-reveal>
@@ -27,9 +30,38 @@ const { degree } = t.education;
       </h3>
       <ul class="space-y-4">
         {
-          t.education.certifications.map((c) => (
-            <li class="border-t border-line pt-4 text-sm leading-relaxed text-soft first:border-t-0 first:pt-0 lg:text-base">
-              {c}
+          certifications.map((c) => (
+            <li class="border-t border-line pt-4 first:border-t-0 first:pt-0">
+              <p class:list={['leading-relaxed lg:text-base', c.inProgress ? 'text-sm text-muted' : 'text-sm text-soft']}>
+                {c.name}
+              </p>
+              <p class="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-subtle">
+                <span>
+                  {c.issuer}
+                  {c.year && <> · {c.year}</>}
+                </span>
+                {c.inProgress && (
+                  <span class="rounded-full border border-line px-2.5 py-0.5 text-xs leading-4 tracking-wider uppercase">
+                    {t.education.inProgressLabel}
+                  </span>
+                )}
+                {c.href && (
+                  <a
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener"
+                    class="group/link inline-flex items-center gap-1 text-muted underline decoration-line-strong underline-offset-4 transition-colors duration-150 hover:text-fg hover:decoration-fg"
+                  >
+                    {t.education.credentialLabel}
+                    <span class="sr-only"> ({t.a11y.opensInNewTab})</span>
+                    <Icon
+                      name="arrow-up-right"
+                      size={12}
+                      class="transition-transform duration-150 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                    />
+                  </a>
+                )}
+              </p>
             </li>
           ))
         }
