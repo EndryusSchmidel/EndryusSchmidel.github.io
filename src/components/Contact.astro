@@ -1,6 +1,7 @@
 ---
 import type { Dictionary } from '../i18n';
 import { profile } from '../site';
+import Icon from './Icon.astro';
 import Section from './Section.astro';
 
 interface Props {
@@ -11,27 +12,41 @@ const { t } = Astro.props;
 
 const whatsappUrl = `https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(t.contact.whatsappMessage)}`;
 
+// O WhatsApp é o botão principal; estes ficam como canais secundários.
+// GitHub fica só no menu do topo: não é canal de contato.
 const channels = [
-  { label: 'WhatsApp', href: whatsappUrl, external: true },
   { label: profile.email, href: `mailto:${profile.email}`, external: false },
-  { label: 'GitHub', href: profile.github, external: true },
   { label: 'LinkedIn', href: profile.linkedin, external: true },
+  { label: profile.company.url.replace('https://', ''), href: profile.company.url, external: true },
 ] as const;
 ---
 
 <Section id="contact" eyebrow={t.contact.eyebrow} title={t.contact.title} size="hero" alt>
   <div data-reveal aria-hidden="true" class="mb-10 h-px w-full bg-line-strong lg:mb-11"></div>
 
-  <p data-reveal class="mb-8 text-muted">{t.contact.lead}</p>
+  <p data-reveal class="mb-10 max-w-2xl text-lg leading-relaxed text-soft lg:text-xl">{t.contact.lead}</p>
 
-  <ul class="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:gap-x-8 md:gap-x-16">
+  <div data-reveal class="mb-10">
+    <a
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener"
+      class="inline-flex items-center gap-3 rounded-full bg-fg px-7 py-4 text-base font-medium text-bg transition-colors duration-150 hover:bg-soft lg:text-lg"
+    >
+      <Icon name="whatsapp" size={20} />
+      {t.contact.ctaLabel}
+      <span class="sr-only"> ({t.a11y.opensInNewTab})</span>
+    </a>
+  </div>
+
+  <ul class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8">
     {
       channels.map((c) => (
         <li data-reveal>
           <a
             href={c.href}
             {...(c.external ? { target: '_blank', rel: 'noopener' } : {})}
-            class="text-lg break-all text-soft underline decoration-line-strong underline-offset-4 transition-colors duration-150 hover:text-fg hover:decoration-fg lg:text-xl"
+            class="break-all text-muted underline decoration-line-strong underline-offset-4 transition-colors duration-150 hover:text-fg hover:decoration-fg lg:text-lg"
           >
             {c.label}
             {c.external && <span class="sr-only"> ({t.a11y.opensInNewTab})</span>}

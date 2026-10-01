@@ -121,6 +121,8 @@ export interface Dictionary {
     eyebrow: string;
     title: string;
     lead: string;
+    /** Texto do botão principal (WhatsApp) */
+    ctaLabel: string;
     emailLabel: string;
     /** Mensagem pré-preenchida no link do WhatsApp */
     whatsappMessage: string;

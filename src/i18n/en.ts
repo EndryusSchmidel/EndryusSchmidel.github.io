@@ -192,9 +192,10 @@ export const en: Dictionary = {
   contact: {
     eyebrow: 'Contact',
     title: "Let's talk",
-    lead: 'The fastest way to reach me is on WhatsApp.',
+    lead: "Need a website, a management system, or want to see Verbi Beauty? Message me on WhatsApp: I reply personally and, if it makes sense, send a written proposal.",
+    ctaLabel: 'Message me on WhatsApp',
     emailLabel: 'Email',
-    whatsappMessage: "Hi Endryus! I saw your website and I'd like to talk.",
+    whatsappMessage: "Hi Endryus! I came from your portfolio and I'd like to talk about ",
     quickMessage: 'Hi, can we talk?',
   },
   footer: {
