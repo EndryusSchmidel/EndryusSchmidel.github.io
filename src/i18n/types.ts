@@ -23,7 +23,7 @@ export interface CertificationItem {
   issuer: string;
   /** Ano de emissão; omitido quando não se sabe */
   year?: string;
-  /** Link público para verificar a credencial */
+  /** Link público da credencial; quando existe, o nome da certificação vira o link */
   href?: string;
   /** Ainda não concluída: aparece por último, mais discreta */
   inProgress?: boolean;
@@ -113,8 +113,6 @@ export interface Dictionary {
       period: string;
     };
     certificationsTitle: string;
-    /** Texto do link de verificação de cada certificação */
-    credentialLabel: string;
     inProgressLabel: string;
     certifications: CertificationItem[];
   };

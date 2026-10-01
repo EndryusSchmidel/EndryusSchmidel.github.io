@@ -163,7 +163,6 @@ export const pt: Dictionary = {
       period: '2025 · conclusão prevista em 2027',
     },
     certificationsTitle: 'Certificações',
-    credentialLabel: 'Ver credencial',
     inProgressLabel: 'em andamento',
     certifications: [
       {

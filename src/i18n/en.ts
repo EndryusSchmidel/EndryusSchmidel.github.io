@@ -165,7 +165,6 @@ export const en: Dictionary = {
       period: '2025 · expected graduation 2027',
     },
     certificationsTitle: 'Certifications',
-    credentialLabel: 'View credential',
     inProgressLabel: 'in progress',
     certifications: [
       {
