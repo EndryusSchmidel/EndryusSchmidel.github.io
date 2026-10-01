@@ -8,12 +8,15 @@ interface Props {
 }
 
 const { t } = Astro.props;
+
+const mainGroups = t.stack.groups.filter((g) => !g.secondary);
+const secondaryGroups = t.stack.groups.filter((g) => g.secondary);
 ---
 
 <Section id="stack" eyebrow={t.stack.eyebrow} title={t.stack.title} alt>
-  <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:gap-17">
+  <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:gap-x-17 lg:gap-y-14">
     {
-      t.stack.groups.map((group) => (
+      mainGroups.map((group) => (
         <div data-reveal>
           <h3 class="mb-6 text-sm tracking-(--tracking-label) text-subtle uppercase">{group.title}</h3>
           <Tags items={group.items} size="md" />
@@ -21,4 +24,13 @@ const { t } = Astro.props;
       ))
     }
   </div>
+
+  {
+    secondaryGroups.map((group) => (
+      <div data-reveal class="mt-12 border-t border-line pt-10 lg:mt-14">
+        <h3 class="mb-5 text-sm tracking-(--tracking-label) text-subtle uppercase">{group.title}</h3>
+        <Tags items={group.items} />
+      </div>
+    ))
+  }
 </Section>

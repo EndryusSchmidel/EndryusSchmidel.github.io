@@ -5,7 +5,7 @@ import Icon from './Icon.astro';
 import Section from './Section.astro';
 import Tags from './Tags.astro';
 import verbiBeauty from '../assets/projects/verbi-beauty.png';
-import hospitalManagement from '../assets/projects/hospital-management.png';
+import drVictor from '../assets/projects/dr-victor.webp';
 
 interface Props {
   t: Dictionary;
@@ -13,9 +13,9 @@ interface Props {
 
 const { t } = Astro.props;
 
-// Capturas das aplicações em produção (verbi-beauty.png e hospital-management.png),
+// Capturas dos trabalhos (verbi-beauty.png e dr-victor.webp), sempre em cores,
 // na mesma ordem de t.projects.items nos dois idiomas.
-const images = [verbiBeauty, hospitalManagement];
+const images = [verbiBeauty, drVictor];
 ---
 
 <Section id="projects" eyebrow={t.projects.eyebrow} title={t.projects.title}>
@@ -35,7 +35,7 @@ const images = [verbiBeauty, hospitalManagement];
               fit="cover"
               widths={[400, 600, 800, 1200]}
               sizes="(min-width: 768px) 50vw, 100vw"
-              class="block h-full w-full object-cover grayscale transition-[filter] duration-500 ease-out group-hover:grayscale-0"
+              class="block h-full w-full object-cover object-top"
             />
           </div>
 

@@ -89,7 +89,8 @@ export interface Dictionary {
     /** Rótulo pequeno em caixa alta exibido acima do título */
     eyebrow: string;
     title: string;
-    groups: { title: string; items: string[] }[];
+    /** `secondary` vai numa linha à parte, mais discreta, abaixo da grade principal */
+    groups: { title: string; items: string[]; secondary?: boolean }[];
   };
   education: {
     /** Rótulo pequeno em caixa alta exibido acima do título */

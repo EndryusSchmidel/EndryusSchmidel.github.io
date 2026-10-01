@@ -22,7 +22,7 @@ export const en: Dictionary = {
   nav: {
     about: 'About',
     experience: 'Experience',
-    projects: 'Projects',
+    projects: 'Work',
     stack: 'Stack',
     education: 'Education',
     contact: 'Contact',
@@ -83,38 +83,43 @@ export const en: Dictionary = {
     ],
   },
   projects: {
-    eyebrow: 'Portfolio',
-    title: 'Projects',
+    eyebrow: 'Verbinden',
+    title: 'Work',
     items: [
       {
         title: 'Verbi Beauty',
-        subtitle: 'Verbinden',
+        subtitle: 'Management system (SaaS)',
         description:
-          'Management system for salons, barbershops, nail studios and beauty studios: team schedule, Pix deposits on online booking and rule-based commissions. In the final stretch before launch. Private source code.',
-        imageAlt: "Verbi Beauty dashboard showing today's schedule, revenue and upcoming appointments",
-        tags: [],
+          'Management system for salons, barbershops, nail studios and beauty studios that cuts no-shows and ends commission spreadsheets: a booking is only confirmed once the Pix deposit is paid, and each professional\'s commission is calculated automatically, net of material costs. In the final stretch before launch. Private source code.',
+        imageAlt:
+          'Verbi Beauty landing page with the headline "Fewer no-shows, commissions without spreadsheets and an organized schedule" and the team schedule screen',
+        tags: [
+          'Online booking with Pix deposit',
+          'Automatic commissions',
+          'Team schedule',
+          'WhatsApp reminders',
+          'Secure multi-tenant',
+        ],
         links: [
           { label: 'beauty.verbinden.com.br', href: 'https://beauty.verbinden.com.br' },
           { label: 'verbinden.com.br', href: 'https://verbinden.com.br' },
         ],
       },
       {
-        title: 'Hospital Management System',
+        title: 'Dr. Victor Camillo website',
+        subtitle: 'Agência Verbinden',
         description:
-          'Hospital asset management system with a full change audit trail via Hibernate Envers, stateless JWT authentication and role-based access control (RBAC). Solo project.',
+          'A website built to turn people who find an endocrinologist in Rio de Janeiro on Google or Instagram into booked appointments: it explains what he treats and how the appointment works, and takes the patient straight to WhatsApp with a ready-made message to book. About to be published.',
         imageAlt:
-          'Hospital Management System login screen, with restricted access and a visitor mode for recruiters',
-        tags: ['Java 21', 'Spring Boot 3', 'React', 'PostgreSQL'],
-        links: [
-          {
-            label: 'Source on GitHub',
-            href: 'https://github.com/EndryusSchmidel/hospital-management-system',
-          },
-          {
-            label: 'Live demo',
-            href: 'https://hospital-management-system-gilt-kappa.vercel.app/',
-          },
+          'Home page of Dr. Victor Camillo\'s website, with the headline "Hormonal balance, health at every stage" and a photo of the doctor',
+        tags: [
+          'SEO to show up on Google',
+          'Practice on Google Maps',
+          'Fast on mobile and desktop',
+          'Portuguese and English',
+          'WhatsApp clicks tracked',
         ],
+        links: [{ label: 'verbinden.com.br/agencia', href: 'https://verbinden.com.br/agencia' }],
       },
     ],
   },
@@ -123,12 +128,25 @@ export const en: Dictionary = {
     title: 'Stack',
     groups: [
       {
-        title: 'Used in production',
-        items: ['React', 'TypeScript', 'Java', 'Spring Boot', 'PostgreSQL', 'Docker'],
+        title: 'Backend',
+        items: ['Java', 'Spring Boot', 'Spring Security', 'JPA/Hibernate', 'Flyway', 'PostgreSQL'],
+      },
+      {
+        title: 'Frontend',
+        items: ['React', 'TypeScript', 'Tailwind', 'TanStack Query', 'Next.js'],
+      },
+      {
+        title: 'Delivery & quality',
+        items: ['Docker', 'GitHub Actions', 'Sentry', 'Cloudflare', 'Vitest', 'Playwright'],
+      },
+      {
+        title: 'Security in practice',
+        items: ['JWT + RBAC', 'Multi-tenant isolation', 'Rate limiting', 'OWASP Top 10'],
       },
       {
         title: 'Improving',
         items: ['Offensive web security', 'Burp Suite', 'Nmap', 'Python for automation'],
+        secondary: true,
       },
     ],
   },
