@@ -2,7 +2,10 @@
 // Uso: npm run og
 import { en } from '../src/i18n/en.ts';
 import { pt } from '../src/i18n/pt.ts';
+import { profile } from '../src/site.ts';
 import { escapeHtml, fontFaces, screenshot } from './lib/browser.mjs';
+
+const companyHost = profile.company.url.replace('https://', '');
 
 for (const [locale, t] of Object.entries({ pt, en })) {
   const html = `<!doctype html><html><head><meta charset="utf-8"><style>
@@ -16,6 +19,8 @@ for (const [locale, t] of Object.entries({ pt, en })) {
     h1 { font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 168px; line-height: 0.85;
       letter-spacing: -0.02em; text-transform: uppercase; margin-top: 40px; }
     p { font-size: 34px; font-weight: 300; color: #d4d4d4; margin-top: 24px; }
+    p + p { margin-top: 10px; }
+    p strong { font-weight: 400; color: #fafafa; }
     .foot { display: flex; justify-content: space-between; font-size: 22px; color: #8a8a8a;
       border-top: 1px solid #262626; padding-top: 24px; }
   </style></head><body>
@@ -23,8 +28,9 @@ for (const [locale, t] of Object.entries({ pt, en })) {
       <div class="label">${escapeHtml(t.person.jobTitle)}</div><div class="dash"></div>
       <h1>Endryus Schmidel</h1>
       <p>${escapeHtml(t.hero.subtitle)}</p>
+      <p>${escapeHtml(t.hero.companyRole)} <strong>${escapeHtml(profile.company.name)}</strong></p>
     </div>
-    <div class="foot"><span>${escapeHtml(t.hero.location)}</span><span>github.com/EndryusSchmidel</span></div>
+    <div class="foot"><span>${escapeHtml(t.hero.location)}</span><span>${escapeHtml(companyHost)}</span></div>
   </body></html>`;
 
   screenshot(html, `public/og-${locale}.png`, 1200, 630);
