@@ -44,7 +44,8 @@ export const pt: Dictionary = {
       'Sou cofundador da Verbinden Tecnologia, empresa do Rio de Janeiro por trás do Verbi Beauty, sistema de gestão para salões, barbearias, esmalterias e estúdios, e da Agência Verbinden, que cria sites sob medida e cuida de anúncios para profissionais e empresas de serviços.',
       'Desenvolvo o Verbi Beauty em dupla com o meu sócio, no backend e no frontend. Os pagamentos com a Asaas (Pix, cartão, split e estorno) e o isolamento de dados entre salões são meus de ponta a ponta. Também conduzo os projetos da agência, da proposta à publicação.',
       'Segurança de aplicações é a área técnica com que mais me identifico. Na prática, construo pensando em isolamento de dados entre tenants, controle de acesso por função e auditoria de alterações, e testo meus próprios sistemas procurando falhas de autorização como IDOR e BOLA.',
-      'Em paralelo, sou desenvolvedor backend e responsável técnico na Plugpix, onde respondo por uma plataforma de telemedicina em produção, do código ao servidor.',
+      'Em paralelo, sou desenvolvedor backend e responsável técnico na Plugpix, onde respondo sozinho por uma plataforma de telemedicina em produção, do código ao servidor.',
+      'Estou aberto a vagas de desenvolvedor backend ou full-stack e de segurança de aplicações, com início imediato.',
     ],
   },
   experience: {
@@ -76,11 +77,11 @@ export const pt: Dictionary = {
         location: 'Remoto',
         current: true,
         description:
-          'Responsável técnico por uma plataforma SaaS de telemedicina white-label em produção, com revendedores e parceiros B2B integrados por API: backend, frontend, servidor e banco de dados.',
+          'Único desenvolvedor e responsável técnico de uma plataforma SaaS de telemedicina white-label em produção, com 46 revendedores e parceiros B2B integrados por API: backend, frontend, servidor e banco de dados. Foram 63 entregas em produção em cerca de quatro meses.',
         highlights: [
           'API de parceiros B2B com isolamento de dados entre parceiros',
           'Baixa automática de pagamentos integrada à Asaas',
-          'Segurança da aplicação e LGPD: controle de acesso, higiene de sessão e proteção de credenciais',
+          'Segurança da aplicação: correção de escalada de privilégio no cadastro, de vazamento de dados entre usuários e de acesso indevido entre parceiros na API',
           'Deploys sem downtime e migrations de PostgreSQL em produção',
         ],
         tags: ['Node.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'React'],
@@ -210,7 +211,7 @@ export const pt: Dictionary = {
   contact: {
     eyebrow: 'Contato',
     title: 'Vamos conversar',
-    lead: 'Precisa de um site, de um sistema de gestão ou quer conhecer o Verbi Beauty? Me chame no WhatsApp: respondo pessoalmente e, se fizer sentido, envio uma proposta por escrito.',
+    lead: 'Estou aberto a vagas de desenvolvedor backend ou full-stack (Java/Spring, Node.js, React) e de segurança de aplicações, remoto ou presencial no RJ, ES e SC, com início imediato. Me chame no WhatsApp ou por e-mail: respondo pessoalmente. Se você precisa de um site ou quer conhecer o Verbi Beauty, o canal é o mesmo.',
     ctaLabel: 'Falar no WhatsApp',
     emailLabel: 'E-mail',
     whatsappMessage: 'Olá, Endryus! Vim pelo seu portfólio e gostaria de conversar sobre ',
