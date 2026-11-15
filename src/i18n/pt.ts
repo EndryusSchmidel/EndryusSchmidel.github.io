@@ -42,9 +42,9 @@ export const pt: Dictionary = {
     title: 'Sobre',
     paragraphs: [
       'Sou cofundador da Verbinden Tecnologia, empresa do Rio de Janeiro por trás do Verbi Beauty, sistema de gestão para salões, barbearias, esmalterias e estúdios, e da Agência Verbinden, que cria sites sob medida e cuida de anúncios para profissionais e empresas de serviços.',
-      'Desenvolvo o Verbi Beauty em dupla com o meu sócio, dividindo backend e frontend. Ele conduz as decisões de arquitetura; eu respondo pela camada de segurança da aplicação. Também conduzo os projetos da agência, da proposta à publicação.',
+      'Desenvolvo o Verbi Beauty em dupla com o meu sócio, no backend e no frontend. Os pagamentos com a Asaas (Pix, cartão, split e estorno) e o isolamento de dados entre salões são meus de ponta a ponta. Também conduzo os projetos da agência, da proposta à publicação.',
       'Segurança de aplicações é a área técnica com que mais me identifico. Na prática, construo pensando em isolamento de dados entre tenants, controle de acesso por função e auditoria de alterações, e testo meus próprios sistemas procurando falhas de autorização como IDOR e BOLA.',
-      'Em paralelo, atuo como desenvolvedor na Plugpix, onde cuido da evolução de uma plataforma de telemedicina em produção.',
+      'Em paralelo, sou desenvolvedor backend e responsável técnico na Plugpix, onde respondo por uma plataforma de telemedicina em produção, do código ao servidor.',
     ],
   },
   experience: {
@@ -59,24 +59,31 @@ export const pt: Dictionary = {
         location: 'Rio de Janeiro',
         current: true,
         description:
-          'Desenvolvimento do Verbi Beauty, SaaS multi-tenant de gestão para salões, barbearias, esmalterias e estúdios, em dupla com o meu sócio: backend e frontend divididos entre nós, com a camada de segurança da aplicação sob minha responsabilidade. Também conduzo os projetos da Agência Verbinden.',
+          'Desenvolvimento do Verbi Beauty, SaaS multi-tenant de gestão para salões, barbearias, esmalterias e estúdios, em dupla com o meu sócio, no backend e no frontend. Pagamentos e segurança da aplicação ficam sob minha responsabilidade. Também conduzo os projetos da Agência Verbinden.',
         highlights: [
-          'Isolamento lógico de dados entre tenants no PostgreSQL',
-          'Autenticação e autorização com Spring Security e JWT',
-          'Mitigação de falhas de autorização (IDOR, BOLA) nas APIs REST',
+          'Multi-tenant com um schema PostgreSQL por salão (isolamento físico)',
+          'Pagamentos com a Asaas: Pix confirmado por webhook, split, estorno e cartão com renovação',
+          'Transactional Outbox com workers agendados e ShedLock, sem broker de mensagens',
+          'Correção de falhas de autorização (IDOR, BOLA) e varredura automática de isolamento a partir do contrato OpenAPI',
+          'Mais de 3 mil testes no backend (JUnit 5, Mockito, Testcontainers)',
         ],
-        tags: ['Java 24', 'Spring Boot 3.4', 'React 18', 'TypeScript', 'Tailwind'],
+        tags: ['Java 24', 'Spring Boot 3.4', 'PostgreSQL 16', 'React 19', 'TypeScript', 'Tailwind'],
       },
       {
-        role: 'Desenvolvedor de Software Pleno',
+        role: 'Desenvolvedor Backend e Responsável Técnico',
         company: 'Plugpix',
         period: 'Desde junho de 2026',
         location: 'Remoto',
         current: true,
         description:
-          'Responsável pelo desenvolvimento e evolução de uma plataforma de telemedicina em produção. Correção de falhas, implementação de novas funcionalidades e distribuição de demandas para a equipe de suporte e a equipe de desenvolvimento.',
-        highlights: [],
-        tags: ['TypeScript', 'React', 'PostgreSQL'],
+          'Responsável técnico por uma plataforma SaaS de telemedicina white-label em produção, com revendedores e parceiros B2B integrados por API: backend, frontend, servidor e banco de dados.',
+        highlights: [
+          'API de parceiros B2B com isolamento de dados entre parceiros',
+          'Baixa automática de pagamentos integrada à Asaas',
+          'Segurança da aplicação e LGPD: controle de acesso, higiene de sessão e proteção de credenciais',
+          'Deploys sem downtime e migrations de PostgreSQL em produção',
+        ],
+        tags: ['Node.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'React'],
       },
     ],
   },
@@ -127,7 +134,16 @@ export const pt: Dictionary = {
     groups: [
       {
         title: 'Backend',
-        items: ['Java', 'Spring Boot', 'Spring Security', 'JPA/Hibernate', 'Flyway', 'PostgreSQL'],
+        items: [
+          'Java',
+          'Spring Boot',
+          'Spring Security',
+          'JPA/Hibernate',
+          'Flyway',
+          'PostgreSQL',
+          'Node.js',
+          'Prisma',
+        ],
       },
       {
         title: 'Frontend',
@@ -135,7 +151,11 @@ export const pt: Dictionary = {
       },
       {
         title: 'Entrega e qualidade',
-        items: ['Docker', 'GitHub Actions', 'Sentry', 'Cloudflare', 'Vitest', 'Playwright'],
+        items: ['Docker', 'GitHub Actions', 'Sentry', 'Cloudflare'],
+      },
+      {
+        title: 'Testes',
+        items: ['JUnit 5', 'Mockito', 'Testcontainers', 'Vitest', 'Playwright'],
       },
       {
         title: 'Segurança na prática',
