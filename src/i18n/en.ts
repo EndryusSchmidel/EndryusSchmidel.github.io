@@ -44,9 +44,10 @@ export const en: Dictionary = {
     title: 'About',
     paragraphs: [
       "I'm a co-founder of Verbinden Tecnologia, a Rio de Janeiro company behind Verbi Beauty, a management system for salons, barbershops, nail studios and beauty studios, and behind Agência Verbinden, which builds custom websites and runs ads for professionals and service businesses.",
-      "I build Verbi Beauty together with my business partner, splitting backend and frontend between us. He leads the architecture decisions; I own the application security layer. I also run the agency's projects, from proposal to launch.",
+      "I build Verbi Beauty together with my business partner, on both backend and frontend. The Asaas payment flows (Pix, card, split and refunds) and the data isolation between salons are mine end to end. I also run the agency's projects, from proposal to launch.",
       "Application security is the technical area I identify with the most. In practice, that means I design for tenant data isolation, role-based access control and change auditing, and I test my own systems for authorization flaws such as IDOR and BOLA.",
-      'In parallel, I work as a developer at Plugpix, evolving a telemedicine platform in production.',
+      'In parallel, I work as backend developer and tech lead at Plugpix, where I am the sole owner of a telemedicine platform in production, from code to server.',
+      "I'm open to backend or full-stack developer roles and application security roles, available immediately.",
     ],
   },
   experience: {
@@ -61,24 +62,31 @@ export const en: Dictionary = {
         location: 'Rio de Janeiro',
         current: true,
         description:
-          'Building Verbi Beauty, a multi-tenant SaaS for managing salons, barbershops, nail studios and beauty studios, as a two-person team with my business partner: backend and frontend split between us, with the application security layer under my responsibility. I also run Agência Verbinden projects.',
+          'Building Verbi Beauty, a multi-tenant SaaS for managing salons, barbershops, nail studios and beauty studios, as a two-person team with my business partner, on both backend and frontend. Payments and application security are my responsibility. I also run Agência Verbinden projects.',
         highlights: [
-          'Logical tenant data isolation in PostgreSQL',
-          'Authentication and authorization with Spring Security and JWT',
-          'Mitigation of authorization flaws (IDOR, BOLA) across the REST APIs',
+          'Multi-tenant with one PostgreSQL schema per salon (physical isolation)',
+          'Payments with Asaas: Pix confirmed by webhook, split, refunds and recurring card billing',
+          'Transactional Outbox with scheduled workers and ShedLock, no message broker',
+          'Fixed authorization flaws (IDOR, BOLA) and built an automated isolation scan driven by the OpenAPI contract',
+          'Over 3,000 backend tests (JUnit 5, Mockito, Testcontainers)',
         ],
-        tags: ['Java 24', 'Spring Boot 3.4', 'React 18', 'TypeScript', 'Tailwind'],
+        tags: ['Java 24', 'Spring Boot 3.4', 'PostgreSQL 16', 'React 19', 'TypeScript', 'Tailwind'],
       },
       {
-        role: 'Mid-level Software Developer',
+        role: 'Backend Developer & Tech Lead',
         company: 'Plugpix',
         period: 'Since June 2026',
         location: 'Remote',
         current: true,
         description:
-          'Responsible for developing and evolving a telemedicine platform in production. Bug fixing, shipping new features and distributing work to the support and development teams.',
-        highlights: [],
-        tags: ['TypeScript', 'React', 'PostgreSQL'],
+          'Sole developer and technical owner of a white-label telemedicine SaaS platform in production, with 46 resellers and B2B partners integrated through an API: backend, frontend, server and database. 63 production releases in about four months.',
+        highlights: [
+          'B2B partner API with data isolation between partners',
+          'Automatic payment reconciliation integrated with Asaas',
+          'Application security: fixed privilege escalation at sign-up, data leakage between users and cross-partner access in the API',
+          'Zero-downtime deploys and PostgreSQL migrations in production',
+        ],
+        tags: ['Node.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'React'],
       },
     ],
   },
@@ -129,7 +137,16 @@ export const en: Dictionary = {
     groups: [
       {
         title: 'Backend',
-        items: ['Java', 'Spring Boot', 'Spring Security', 'JPA/Hibernate', 'Flyway', 'PostgreSQL'],
+        items: [
+          'Java',
+          'Spring Boot',
+          'Spring Security',
+          'JPA/Hibernate',
+          'Flyway',
+          'PostgreSQL',
+          'Node.js',
+          'Prisma',
+        ],
       },
       {
         title: 'Frontend',
@@ -137,7 +154,11 @@ export const en: Dictionary = {
       },
       {
         title: 'Delivery & quality',
-        items: ['Docker', 'GitHub Actions', 'Sentry', 'Cloudflare', 'Vitest', 'Playwright'],
+        items: ['Docker', 'GitHub Actions', 'Sentry', 'Cloudflare'],
+      },
+      {
+        title: 'Testing',
+        items: ['JUnit 5', 'Mockito', 'Testcontainers', 'Vitest', 'Playwright'],
       },
       {
         title: 'Security in practice',
@@ -192,7 +213,7 @@ export const en: Dictionary = {
   contact: {
     eyebrow: 'Contact',
     title: "Let's talk",
-    lead: "Need a website, a management system, or want to see Verbi Beauty? Message me on WhatsApp: I reply personally and, if it makes sense, send a written proposal.",
+    lead: "I'm open to backend or full-stack developer roles (Java/Spring, Node.js, React) and application security roles, remote or on-site in Brazil (RJ, ES, SC), available immediately. Message me on WhatsApp or by email: I reply personally. If you need a website or want to see Verbi Beauty, it's the same channel.",
     ctaLabel: 'Message me on WhatsApp',
     emailLabel: 'Email',
     whatsappMessage: "Hi Endryus! I came from your portfolio and I'd like to talk about ",
