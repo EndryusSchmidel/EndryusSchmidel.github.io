@@ -58,6 +58,10 @@ const { t } = Astro.props;
       {t.hero.lead}
     </p>
 
-    <p class="mt-8 text-sm tracking-wider text-subtle">{t.hero.location}</p>
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <a href="#work-in-motion" class="inline-flex min-h-11 items-center gap-6 rounded-sm bg-fg px-5 py-3 text-sm text-bg transition-colors hover:bg-soft">{t.meta.htmlLang === 'en' ? 'Explore my work' : 'Ver meu trabalho'}<span aria-hidden="true">↘</span></a>
+      <a href="#contact" class="inline-flex min-h-11 items-center rounded-sm border border-line-strong bg-bg/85 px-5 py-3 text-sm text-soft transition-colors hover:border-fg hover:text-fg">{t.meta.htmlLang === 'en' ? 'Get in touch' : 'Vamos conversar'}</a>
+    </div>
+    <p class="mt-6 text-sm tracking-wider text-subtle">{t.hero.location}</p>
   </div>
 </header>
